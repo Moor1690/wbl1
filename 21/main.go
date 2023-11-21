@@ -1,6 +1,9 @@
 // Package adapter is an example of the Adapter Pattern.
 package main
 
+/*
+Реализовать паттерн «адаптер» на любом примере.
+*/
 import "fmt"
 
 // Target provides an interface with which the system should work.

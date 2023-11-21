@@ -1,5 +1,8 @@
 package main
 
+/*
+Имеется последовательность строк - (cat, cat, dog, cat, tree) создать для нее собственное множество.
+*/
 import (
 	"fmt"
 )
@@ -15,4 +18,5 @@ func main() {
 	for key := range set {
 		fmt.Println(key) // Вывод элементов множества
 	}
+	fmt.Println(set)
 }

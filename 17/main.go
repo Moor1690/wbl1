@@ -1,5 +1,8 @@
 package main
 
+/*
+Реализовать бинарный поиск встроенными методами языка.
+*/
 import "fmt"
 
 func binarySearch(arr []int, target int) int {
@@ -28,6 +31,6 @@ func main() {
 	if result != -1 {
 		fmt.Printf("Элемент найден на индексе %d\n", result)
 	} else {
-		fmt.Println("Элемент не найден в массиве")
+		fmt.Println("Элемент не найден")
 	}
 }

@@ -1,22 +1,31 @@
 package main
 
+/*
+Разработать программу, которая переворачивает слова в строке.
+Пример: «snow dog sun — sun dog snow».
+*/
 import (
 	"fmt"
 	"strings"
 )
 
 func main() {
-	str := "snow dog sun"
+	str := "snow dog sun" // Исходная строка.
 
+	// Разбиваем строку на слова с помощью функции strings.Fields.
 	arr := strings.Fields(str)
 
-	result := ""
+	result := "" // Переменная для хранения обратной строки.
 
+	// Итерируемся в обратном порядке по срезу слов.
 	for i := len(arr) - 1; i >= 0; i-- {
-		result += arr[i]
+		result += arr[i] // Добавляем текущее слово к результату.
+
+		// Добавляем пробел, если это не последнее слово.
 		if i > 0 {
 			result += " "
 		}
 	}
-	fmt.Println(result)
+
+	fmt.Println(result) // Выводим результат, который представляет собой обратную строку из слов.
 }

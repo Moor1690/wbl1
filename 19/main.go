@@ -1,5 +1,8 @@
 package main
 
+/*
+Разработать программу, которая переворачивает подаваемую на ход строку (например: «главрыба — абырвалг»). Символы могут быть unicode.
+*/
 import "fmt"
 
 func reverseString(input string) string {

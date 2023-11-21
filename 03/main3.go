@@ -1,5 +1,8 @@
 package main
 
+/*
+Дана последовательность чисел: 2,4,6,8,10. Найти сумму их квадратов(22+32+42….) с использованием конкурентных вычислений.
+*/
 import (
 	"fmt"
 	"sync"
@@ -9,25 +12,25 @@ import (
 func main() {
 	start := time.Now() // Запоминаем время начала выполнения
 
-	var wg sync.WaitGroup
-	result := 0
-	arr := make([]int, 1e6)
+	var wg sync.WaitGroup   // Группа ожидания для синхронизации горутин
+	result := 0             // Переменная для результата
+	arr := make([]int, 1e6) // Создание массива из 1 миллиона элементов
 
 	for i := range arr {
-		wg.Add(1)
+		wg.Add(1) // Добавление счетчика для каждой горутины
 
-		go func(i *int) {
-			defer wg.Done()
-			*i = *i * *i
-		}(&arr[i])
+		go func(i *int) { // Запуск горутины, передаем указатель на элемент массива
+			defer wg.Done() // Уменьшение счетчика при завершении горутины
+			*i = *i * *i    // Вычисление квадрата элемента по указателю
+		}(&arr[i]) // Передаем адрес элемента массива
 	}
 
-	wg.Wait()
+	wg.Wait() // Ожидание завершения всех горутин
 
-	for i := range arr {
-		result += arr[i]
+	for _, val := range arr {
+		result += val // Суммирование всех элементов массива
 	}
-	fmt.Println(result)
-	elapsed := time.Since(start)                                 // Вычисляем время выполнения
+	fmt.Println(result)                                          // Вывод суммы
+	elapsed := time.Since(start)                                 // Вычисление времени выполнения
 	fmt.Printf("Execution time: %d ns\n", elapsed.Nanoseconds()) // Вывод времени выполнения в наносекундах
 }

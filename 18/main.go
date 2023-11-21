@@ -1,5 +1,8 @@
 package main
 
+/*
+Реализовать структуру-счетчик, которая будет инкрементироваться в конкурентной среде. По завершению программа должна выводить итоговое значение счетчика.
+*/
 import (
 	"fmt"
 	"sync"
@@ -7,26 +10,30 @@ import (
 
 //https://stackoverflow.com/questions/44949467/when-do-you-embed-mutex-in-struct-in-go
 
+// Определение структуры "counter" с полем "count" и встроенным мьютексом для синхронизации доступа к нему.
 type counter struct {
 	count int
 	sync.Mutex
 }
 
 func main() {
+	var wg sync.WaitGroup  // Создание WaitGroup для ожидания завершения всех горутин.
+	c := counter{count: 0} // Создание экземпляра структуры "counter" с начальным значением счетчика 0.
+	count := 42            // Количество горутин, которые будут инкрементировать счетчик.
 
-	var wg sync.WaitGroup
-	c := counter{count: 0}
-	count := 150
+	// Запуск горутин для инкрементирования счетчика.
 	for i := 0; i < count; i++ {
-		wg.Add(1)
+		wg.Add(1) // Увеличиваем счетчик WaitGroup для каждой горутины.
 		go func() {
-			defer wg.Done()
-			c.Lock()
-			c.count++
-			c.Unlock()
+			defer wg.Done() // Уменьшаем счетчик WaitGroup при завершении горутины.
+
+			c.Lock()   // Захватываем мьютекс для доступа к счетчику.
+			c.count++  // Инкрементируем счетчик.
+			c.Unlock() // Освобождаем мьютекс, чтобы другие горутины могли получить доступ.
+
 		}()
 	}
 
-	wg.Wait()
-	fmt.Println(c.count)
+	wg.Wait()            // Ожидание завершения всех горутин.
+	fmt.Println(c.count) // Выводит значение счетчика после работы всех горутин.
 }

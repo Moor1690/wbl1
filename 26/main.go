@@ -1,5 +1,8 @@
 package main
 
+/*
+Разработать программу, которая проверяет, что все символы в строке уникальные (true — если уникальные, false etc). Функция проверки должна быть регистронезависимой.
+*/
 import (
 	"fmt"
 	"strings"
@@ -18,6 +21,14 @@ func uniqueString(s string) bool {
 }
 
 func main() {
-	str := "asdfg"
-	fmt.Println(uniqueString(str)) // Выведет false, так как есть повторяющиеся символы
+	str1 := "asdfg"
+	str2 := "abcd"
+	str3 := "abCdefAaf"
+	str4 := "aabcd"
+
+	fmt.Println(uniqueString(str1))
+	fmt.Println(uniqueString(str2))
+	fmt.Println(uniqueString(str3))
+	fmt.Println(uniqueString(str4))
+
 }

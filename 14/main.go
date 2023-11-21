@@ -1,11 +1,15 @@
 package main
 
+/*
+Разработать программу, которая в рантайме способна определить тип переменной: int, string, bool, channel из переменной типа interface{}.
+*/
 import (
 	"fmt"
 	"reflect"
 )
 
 func main() {
+
 	var myVar interface{}
 
 	myVar = 42
